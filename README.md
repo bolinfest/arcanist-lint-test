@@ -24,7 +24,7 @@ In particular, it appears to be ignored silently. I created this repo to test
 this out. The file to be linted is `example.txt`:
 
 ```
-i start with a lowercase letter and do not end with a full stop.
+i start with a lowercase letter and do not end with a full stop
 ```
 
 `CapitalizeLineLinter` is a hardcoded lint to capitalize the first line while
