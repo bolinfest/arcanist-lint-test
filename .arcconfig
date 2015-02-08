@@ -1,0 +1,8 @@
+{
+  "project_id": "arcanist-lint-test",
+
+  "lint_engine": "CustomArcanistLintEngine",
+  "load": [
+    "my-arcanist"
+  ]
+}
