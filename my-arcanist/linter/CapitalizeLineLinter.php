@@ -9,12 +9,26 @@ class CapitalizeLineLinter extends ArcanistLinter {
   }
 
   public function lintPath($path) {
-    $this->raiseLintAtOffset(
-      /* offset */ 0, // This is 0-based and is a char offset into the file. 
-      self::LINT_NOT_CAPITALIZED,
-      'Line must be capitalized.',
-      'i start with a lowercase letter and do not end with a full stop',
-      'I start with a lowercase letter and do not end with a full stop');
+    // $console = PhutilConsole::getConsole();
+    $data = $this->getData($path);
+    $lines = explode("\n", $data);
+
+    $offset = 0;
+    foreach ($lines as $index => $line) {
+      $trimmed = trim($line);
+      $len = strlen($trimmed);
+
+      if ($len !== 0 && $trimmed[0] !== strtoupper($trimmed[0])) {
+        $this->raiseLintAtOffset(
+          $offset,
+          self::LINT_NOT_CAPITALIZED,
+          'Line must be capitalized.',
+          $line,
+          strtoupper($trimmed[0]) . substr($trimmed, 1));
+      }
+
+      $offset += $len + 1; // +1 for newline.
+    }
   }
 
 }
